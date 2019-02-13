@@ -5,7 +5,7 @@ template <class VertexType, class EdgeType>
 class listGraph:public graph
 {
 public:
-	listGraph();
+	listGraph(int verSize);
 	~listGraph();
 	void createGraph(const VertexType V[], const EdgeType E[]);
 	bool insert(int from, int to, EdgeType w);
@@ -14,15 +14,27 @@ public:
 	void BFS();		// 广度优先搜索实现
 	void DFS();		// 深度优先搜索实现
 	void topSort();	// 拓补排序实现
+protected:
+	int verNum,edgeNum;		// 表示节点的数量
 private:
 	struct edgeList {
-		int weight;			// 权值
+		EdgeType weight;			// 权值
 		edgeList *next;		// 指向下一个节点
 		int node;			// 表示该边界点所指向的节点列表中的第几个节点
+		edgeList(int n ,EdgeType e, edgeList a = NULL) {
+			node = n;
+			weight = e;
+			next = a;
+		}
 	};
 	struct NodeList {
 		edgeList *head;		// 表示边界点的头指针
+		VertextType name;   // 表示该节点的名称
+		NodeList(VertexType v, edgeList a = NULL) {
+			name = v;
+			head = a;
+		}
 	};
-
-	NodeList nodeList;		
+	NodeList nodeList;
+	bool *visited;			// 用于搜索的数组
 };

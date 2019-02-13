@@ -1,0 +1,12 @@
+﻿  listGraph.cpp
+f:\c++\listgraph\listgraph\listgraph.h(6): error C2955: “graph”: 使用 类 模板 需要 模板 参数列表
+  f:\c++\listgraph\listgraph\graph.h(4): note: 参见“graph”的声明
+  f:\c++\listgraph\listgraph\listgraph.h(32): note: 参见对正在编译的 类 模板 实例化 "listGraph<VertexType,EdgeType>" 的引用
+f:\c++\listgraph\listgraph\listgraph.h(27): error C3646: “name”: 未知重写说明符
+  f:\c++\listgraph\listgraph\listgraph.h(26): note: 参见对正在编译的 类 模板 实例化 "listGraph<VertexType,EdgeType>::NodeList" 的引用
+f:\c++\listgraph\listgraph\listgraph.h(27): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+f:\c++\listgraph\listgraph\listgraph.cpp(5): error C2649: “typename”: 不是“class”
+f:\c++\listgraph\listgraph\listgraph.cpp(23): fatal error C1004: 发现意外的文件尾
+  main.cpp
+  正在编译...
+  正在生成代码...
