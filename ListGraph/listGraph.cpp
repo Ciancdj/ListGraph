@@ -1,5 +1,7 @@
 #include "listGraph.h"
-
+#include <string.h>
+#include <queue>
+#include <stack>
 
 template<class VertexType, class EdgeType>
 listGraph<class VertexType, class EdgeType>::listGraph(int verSize)
@@ -33,6 +35,51 @@ void listGraph<VertexType, EdgeType>::createGraph(const VertexType V[], const Ed
 			}
 		}
 	}
+}
+
+template<class VertexType, class EdgeType>
+void listGraph<VertexType, EdgeType>::BFS()
+{
+	memset(visited, false, sizeof(visited));
+	queue<int> que;
+	que.push(0);
+	edgeList *head;
+	while (!que.empty()) {
+		int temp = que.front();
+		que.pop();
+		if (!visited[temp]) {
+			visited[temp] = true;
+			cout << nodeList[temp].name << " ";
+			head = nodeList[temp].head;
+			while (head != NULL) {
+				que.push(head->node);
+				head = head->next;
+			}
+		}
+	}
+	cout << endl;
+}
+
+template<class VertexType, class EdgeType>
+void listGraph<VertexType, EdgeType>::DFS()
+{
+	memset(visited, false, sizeof(visited));
+	stack<int> sta;
+	sta.push(0);
+	edgeList *head;
+	while (!sta.empty()) {
+		int temp = sta.top();
+		sta.pop();
+		if (!vivited[temp]) {
+			head = nodeList[temp].head;
+			cout << nodeList[temp].name << " ";
+			while (head != NULL) {
+				sta.push(head->node);
+				head = head->next;
+			}
+		}
+	}
+	cout << endl;
 }
 
 template<class VertexType, class EdgeType>
