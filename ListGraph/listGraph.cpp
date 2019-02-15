@@ -48,6 +48,19 @@ bool listGraph<VertexType, EdgeType>::insert(int from, int to, EdgeType w)
 }
 
 template<class VertexType, class EdgeType>
+bool listGraph<VertexType, EdgeType>::remove(int from, int to)
+{
+	if (exist(from, to)) return false;
+	edgeList *p = nodeList[from].head,*q;
+	while (p != NULL && p->node != to) p = p->next;
+	if(p == NULL) return false;
+	q = p;
+	p = p->next;
+	q->next = p->next;
+	delete p;
+}
+
+template<class VertexType, class EdgeType>
 bool listGraph<VertexType, EdgeType>::exist(int from, int to)
 {
 	edgeList *p = nodeList[from].head;
@@ -102,7 +115,53 @@ void listGraph<VertexType, EdgeType>::DFS()
 }
 
 template<class VertexType, class EdgeType>
+void listGraph<VertexType, EdgeType>::topSort()
+{
+	queue<int> que;
+	int *curNum = new int[verNum];
+	edgeList *p;
+	memset(visited, false, sizeof(visited));	
+	memset(curNum, 0, sizeof(curNum));
+	for (int index = 0; index < verNum; index++) {
+		p = nodeList.head;
+		while (p != NULL) {
+			curNum[p->node]++;
+			p = p->next;
+		}
+	}
+	for (int index = 0; index < verNum; index++) {
+		if (curNum[index] == 0)
+			que.push(index);
+		curNum[index] = -1;
+	}
+	while (!que.empty) {
+		int n = que.front();
+		que.pop();
+		p = nodeList.head;
+		while (p != NULL) {
+			curNum[p->node]--;
+			p = p->next;
+		}
+		for (int index = 0; index < verNum; index++) {
+			if (curNum[index] == 0)
+				que.push(index);
+		}
+	}
+}
+
+template<class VertexType, class EdgeType>
 listGraph<VertexType, EdgeType>::~listGraph()
 {
-
+	edgeList *p, *q;
+	for (int index = 0; index < verNum; index++) {
+		p = nodeList[index].head;
+		while (p != NULL) {
+			q = p;
+			p = p->next;
+			delete q;
+		}
+	}
+	delete[]nodeList;
+	delete[]visited;
 }
+
