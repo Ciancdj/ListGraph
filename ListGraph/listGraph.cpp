@@ -38,6 +38,25 @@ void listGraph<VertexType, EdgeType>::createGraph(const VertexType V[], const Ed
 }
 
 template<class VertexType, class EdgeType>
+bool listGraph<VertexType, EdgeType>::insert(int from, int to, EdgeType w)
+{
+	if (exist(from, to)) return false;
+	edgeList *p = nodeList[from].head;
+	while (p != NULL)	p = p->next;
+	p->next = new edgeList(to, w);
+	return true;
+}
+
+template<class VertexType, class EdgeType>
+bool listGraph<VertexType, EdgeType>::exist(int from, int to)
+{
+	edgeList *p = nodeList[from].head;
+	while (p != NULL && p->node != to) p = p->next;
+	if (p == NULL) return false;
+	return true;
+}
+
+template<class VertexType, class EdgeType>
 void listGraph<VertexType, EdgeType>::BFS()
 {
 	memset(visited, false, sizeof(visited));
